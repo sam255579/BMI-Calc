@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BMI Calculator</title>
+  </head>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      flex-direction: column;
+    }
+
+    .height {
+      margin-top: 10px;
+    }
+    .Weight {
+      margin-top: 10px;
+    }
+    .button {
+      margin-top: 10px;
+    }
+    h2 {
+      margin-top: 50px;
+      text-decoration: underline;
+    }
+    #Result {
+      font-size: 25px;
+      color: yellowgreen;
+      margin: 20px;
+    }
+    .height label{
+      font-size: 18px;
+    }
+    .height input{
+      padding: 5px;
+      margin-left: 20px;
+      border: 2px dashed darkgoldenrod;
+      border-radius: 5px;
+    }
+    .Weight label{
+      font-size: 18px;
+    }
+    .Weight input{
+      padding: 5px;
+      margin-left: 20px;
+      border: 2px dashed darkgoldenrod;
+      border-radius: 5px;
+    }
+    .button button{
+      margin-top: 10px;
+      height: 30px;
+      width: 120px;
+      border-radius: 10px;
+      border: 2px solid yellowgreen ;
+      background-color: black;
+      color: aqua;
+
+    }
+
+  </style>
+  <body>
+    <form action="">
+      <h2>BMI Calculator</h2>
+      
+        <div class="height">
+          <label for="height">Height</label>
+          <input type="text" id="height" name="Height" placeholder="Input Height in cm" />
+        </div>
+        <div class="Weight">
+          <label for="weight">Weight</label>
+          <input type="text" id="weight" name="Weight" placeholder="Input Weight in kg" />
+        </div>
+        <div class="button">
+          <button id="calculate-btn">Calculate</button>
+          <div id="Result"></div>
+        </div>
+      
+
+      <div class="guide">
+        <h2>BMI Weight Guide</h2>
+        <p>Under Weight = Less than 18.6</p>
+        <p>Normal Range = 18.6 to 24.9</p>
+        <p>Over Weight = Greater than 24.9</p>
+      </div>
+    </form>
+
+    <script>
+      const form = document.querySelector('form');
+
+      form.addEventListener('submit', function(e){
+        e.preventDefault();
+
+        const height = parseInt(document.querySelector('#height').value);
+        const weight = parseInt(document.querySelector('#weight').value);
+        const result = document.querySelector('#Result');
+
+        if(height === '' || height < 0 || isNaN(height)){
+            result.innerHTML = `Please give a valid Height `;
+        }else if(weight === '' || weight < 0 || isNaN(weight)){
+            result.innerHTML = "Please give a valid Weight";
+        }else{
+            const BMI = (weight / ((height*height)/10000)).toFixed(2);
+            if(BMI > 0 && BMI < 18.6 ){
+              result.innerHTML = `${BMI} - You are Under Weight`;
+            }else if(BMI >= 18.6 && BMI <= 24.9 ){
+              result.innerHTML = `${BMI} - You are in Normal Weight`;
+            }else if(BMI > 24.9){
+              result.innerHTML = `${BMI} - You are Over Weight`;
+            }else{
+              result.innerHTML = `Please input valid input`;
+            }
+            
+        }
+      })
+
+    </script> 
+  </body>
+</html>
